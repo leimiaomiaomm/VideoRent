@@ -29,4 +29,6 @@ public interface UserDao {
 
     int editUserMsg(User record);
 
+    List<User> searchUser(String condition);
+
 }

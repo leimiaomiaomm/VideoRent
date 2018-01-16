@@ -104,6 +104,21 @@ public class UserController {
     }
 
     /**
+     * 搜索用户
+     * @param condition
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/searchUser")
+    public ModelAndView searchUser(String condition) {
+        ModelAndView modelAndView = new ModelAndView();
+        List<User> users = userService.searchUser(condition);
+        modelAndView.addObject("users",users);
+        return modelAndView;
+    }
+
+
+    /**
      * 用户登录
      * @param map
      * @return

@@ -26,4 +26,6 @@ public interface UserService {
       int editUserMsg(Map map);
 
       int deleteUser(String userId);
+
+      List<User> searchUser(String condition);
 }

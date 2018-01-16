@@ -146,5 +146,11 @@ public class UserServiceImpl implements UserService {
         return userDao.deleteByPrimaryKey(userId);
     }
 
+    @Override
+    public List<User> searchUser(String condition) {
+        List<User> userList = userDao.searchUser(condition);
+        return userList;
+    }
+
 
 }
