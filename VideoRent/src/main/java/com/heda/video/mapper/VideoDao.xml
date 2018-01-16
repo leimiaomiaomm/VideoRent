@@ -85,12 +85,17 @@
 
 
 
-  <select id="getHotVideoList" resultMap="BaseResultMap">
-    SELECT
-    <include refid="Base_Column_List" />
+  <select id="getHotVideoList" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT *
     FROM  video
+    WHERE type=#{type}
     ORDER BY rent_times DESC
-    limit 5
+    limit 3
+  </select>
+
+  <select id="getHotTypes" resultType="java.lang.String">
+    SELECT DISTINCT type
+    FROM video
   </select>
   <select id="getNewVideoList" resultMap="BaseResultMap">
     SELECT *

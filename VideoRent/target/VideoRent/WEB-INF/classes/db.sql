@@ -28,8 +28,6 @@ CREATE TABLE IF NOT EXISTS `user` (
   `password` varchar(255) NOT NULL,
   `is_admin` char(2) NOT NULL COMMENT '身份，0-管理员；1-普通用户',
   `ID_card` varchar(255) NOT NULL COMMENT '身份证',
-  `age` int(11) DEFAULT NULL COMMENT '年龄',
-  `gender` varchar(255) DEFAULT NULL COMMENT '性别',
   `phone` varchar(255) DEFAULT NULL COMMENT '电话',
   `email` varchar(255) DEFAULT NULL COMMENT '邮箱',
   PRIMARY KEY (`user_id`)

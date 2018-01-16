@@ -18,8 +18,8 @@
     <title>测试文件上传</title>
 </head>
 <body>
-<form action="<%=basePath%>video/testUpload" method="post" enctype="multipart/form-data">
-    选择文件：<input type="file" name="fileupload"/>
+<form action="<%=basePath%>video/upload" method="post" enctype="multipart/form-data">
+    选择文件：<input type="file" name="file"/>
     <br/>
     文件描述：<input type="text" name="desc"/>
     <br/>

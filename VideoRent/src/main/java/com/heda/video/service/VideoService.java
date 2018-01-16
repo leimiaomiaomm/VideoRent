@@ -24,7 +24,9 @@ public interface VideoService {
 
     Video getById(String id);
 
-    List<Video> getHotVideoList();
+    List<Video> getHotVideoList(String type);
+
+    List<String> getHotTypes();
 
     List<Video> getNewVideoList();
 

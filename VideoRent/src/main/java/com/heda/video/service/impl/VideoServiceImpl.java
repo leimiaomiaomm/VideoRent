@@ -112,9 +112,15 @@ public class VideoServiceImpl implements VideoService {
     }
 
     @Override
-    public List<Video> getHotVideoList() {
-        List<Video> videoList = videoDao.getHotVideoList();
+    public List<Video> getHotVideoList(String type) {
+        List<Video> videoList = videoDao.getHotVideoList(type);
         return videoList;
+    }
+
+    @Override
+    public List<String> getHotTypes() {
+        List<String> hotTypes = videoDao.getHotTypes();
+        return hotTypes;
     }
 
     @Override

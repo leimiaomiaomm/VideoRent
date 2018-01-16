@@ -7,13 +7,11 @@
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="is_admin" jdbcType="CHAR" property="isAdmin" />
     <result column="ID_card" jdbcType="VARCHAR" property="idCard" />
-    <result column="age" jdbcType="INTEGER" property="age" />
-    <result column="gender" jdbcType="VARCHAR" property="gender" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="email" jdbcType="VARCHAR" property="email" />
   </resultMap>
   <sql id="Base_Column_List">
-    user_id, user_name, password, is_admin, ID_card, age, gender, phone, email
+    user_id, user_name, password, is_admin, ID_card, phone, email
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
@@ -33,74 +31,11 @@
   </delete>
   <insert id="insert" parameterType="com.heda.video.entity.User">
     insert into user (user_id, user_name, password, 
-      is_admin, ID_card, age, 
-      gender, phone, email
+      is_admin, ID_card, phone, email
       )
     values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{isAdmin,jdbcType=CHAR}, #{idCard,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, 
-      #{gender,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}
+      #{isAdmin,jdbcType=CHAR}, #{idCard,jdbcType=VARCHAR},#{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}
       )
-  </insert>
-  <insert id="insertSelective" parameterType="com.heda.video.entity.User">
-    insert into user
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
-        user_id,
-      </if>
-      <if test="userName != null">
-        user_name,
-      </if>
-      <if test="password != null">
-        password,
-      </if>
-      <if test="isAdmin != null">
-        is_admin,
-      </if>
-      <if test="idCard != null">
-        ID_card,
-      </if>
-      <if test="age != null">
-        age,
-      </if>
-      <if test="gender != null">
-        gender,
-      </if>
-      <if test="phone != null">
-        phone,
-      </if>
-      <if test="email != null">
-        email,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
-        #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="userName != null">
-        #{userName,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="isAdmin != null">
-        #{isAdmin,jdbcType=CHAR},
-      </if>
-      <if test="idCard != null">
-        #{idCard,jdbcType=VARCHAR},
-      </if>
-      <if test="age != null">
-        #{age,jdbcType=INTEGER},
-      </if>
-      <if test="gender != null">
-        #{gender,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null">
-        #{phone,jdbcType=VARCHAR},
-      </if>
-      <if test="email != null">
-        #{email,jdbcType=VARCHAR},
-      </if>
-    </trim>
   </insert>
 
   <update id="updateByPrimaryKey" parameterType="com.heda.video.entity.User">
@@ -108,6 +43,15 @@
     set
       password = #{password,jdbcType=VARCHAR}
     where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+
+  <update id="editUserMsg" parameterType="com.heda.video.entity.User">
+    update user
+    set
+      phone = #{phone,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR}
+    where user_id=#{userId,jdbcType=INTEGER}
   </update>
 
 
@@ -122,5 +66,11 @@
     FROM user
     WHERE 1=1
     limit #{startNum},#{pageSize}
+  </select>
+
+  <select id="searchUser" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT *
+    FROM user
+    WHERE user_name LIKE concat('%',#{condition},'%') OR  ID_card LIKE concat('%',#{condition},'%')
   </select>
 </mapper>

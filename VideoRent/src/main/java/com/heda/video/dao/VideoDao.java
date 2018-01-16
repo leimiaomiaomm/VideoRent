@@ -29,7 +29,9 @@ public interface VideoDao {
 
     int deleteMoreVideo(List<Integer> list);
 
-    List<Video> getHotVideoList();
+    List<Video> getHotVideoList(String type);
+
+    List<String> getHotTypes();
 
     List<Video> getNewVideoList();
 

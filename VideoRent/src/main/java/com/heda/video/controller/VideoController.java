@@ -8,6 +8,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jmx.export.annotation.ManagedOperation;
 import org.springframework.stereotype.Controller;
@@ -20,9 +21,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.lang.reflect.Type;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by leimiaomiao on 2018/1/5.
@@ -179,8 +180,16 @@ public class VideoController {
     @RequestMapping("/getVideoHot")
    public ModelAndView getVideoHot(){
        ModelAndView modelAndView = new ModelAndView();
-       List<Video> videoList = videoService.getHotVideoList();
-       modelAndView.addObject("HotVideos", videoList);
+        Map map = new HashMap();
+        List<Map<String,List>> list = new ArrayList<>();
+        List<String> hotType = videoService.getHotTypes();
+        for (String s : hotType) {
+            List<Video> videoList = videoService.getHotVideoList(s);
+            map.put("type",s);
+            map.put("videos",videoList);
+            list.add(map);
+        }
+       modelAndView.addObject("HotVideos", list);
        return modelAndView;
    }
 
@@ -212,70 +221,27 @@ public class VideoController {
    }
 
 
-   @ResponseBody
-   @RequestMapping("/testUpload")
-   public ModelAndView upload(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
-       request.setCharacterEncoding("utf-8");
-       response.setCharacterEncoding("utf-8");
-       //1、创建一个DiskFileItemFactory工厂
-       DiskFileItemFactory factory = new DiskFileItemFactory();
-       //2、创建一个文件上传解析器
-       ServletFileUpload upload = new ServletFileUpload(factory);
-       //解决上传文件名的中文乱码
-       upload.setHeaderEncoding("UTF-8");
-       factory.setSizeThreshold(1024 * 500);//设置内存的临界值为500K
-       File linshi = new File("E:\\Users\\leimiaomiao\\Desktop\\img");//当超过500K的时候，存到一个临时文件夹中
-       factory.setRepository(linshi);
-       upload.setSizeMax(1024 * 1024 * 5);//设置上传的文件总的大小不能超过5M
-       try {
-           // 1. 得到 FileItem 的集合 items
-           List<FileItem> /* FileItem */items = upload.parseRequest(request);
-
-           // 2. 遍历 items:
-           for (FileItem item : items) {
-               // 若是一个一般的表单域, 打印信息
-               if (item.isFormField()) {
-                   String name = item.getFieldName();
-                   String value = item.getString("utf-8");
-
-                   System.out.println(name + ": " + value);
-
-
-               }
-               // 若是文件域则把文件保存到 e:\\files 目录下.
-               else {
-                   String fileName = item.getName();
-                   long sizeInBytes = item.getSize();
-                   System.out.println(fileName);
-                   System.out.println(sizeInBytes);
-
-                   InputStream in = item.getInputStream();
-                   byte[] buffer = new byte[1024];
-                   int len = 0;
-
-                   fileName = "f:\\files\\" + fileName;//文件最终上传的位置
-                   System.out.println(fileName);
-                   OutputStream out = new FileOutputStream(fileName);
-
-                   while ((len = in.read(buffer)) != -1) {
-                       out.write(buffer, 0, len);
-                   }
-
-                   out.close();
-                   in.close();
-               }
-           }
-
-       } catch (FileUploadException e) {
-           e.printStackTrace();
-       } catch (IOException e) {
-           e.printStackTrace();
-       }
-       ModelAndView modelAndView = new ModelAndView("/index.jsp");
-       modelAndView.addObject("result",true);
-       return modelAndView;
-
-}
+    /**
+     * 上传文件
+     * @param file--前端文件名
+     * @param req
+     * @return
+     * @throws IOException
+     */
+    @ResponseBody
+    @RequestMapping(value="/upload",method=RequestMethod.POST)
+    public String add(@RequestParam("file")MultipartFile file,HttpServletRequest req) throws IOException {//一定要紧跟Validate之后写验证结果类
+        //获取upload文件夹得真实路径
+        String realpath = req.getSession().getServletContext().getRealPath("/resources/upload");//获取文件上传的路径（项目目录+项目目录下其他指定目录）
+        System.out.println(realpath);
+        System.out.println(file.getName());//获取attach的属性名称，也就是前台表单的名称
+        System.out.println(file.getOriginalFilename());//获取上传文件的名称
+        System.out.println(file.getContentType());//获取上传文件的类型
+        File f = new File(realpath+"/"+file.getOriginalFilename());
+        //Apache的上传文件的工具类
+        FileUtils.copyInputStreamToFile(file.getInputStream(),f);
+        return "redirect:/index.html";
+    }
 
     public static void main(String[] args) {
         JettyHttpServiceLoader.main(new String[]{});

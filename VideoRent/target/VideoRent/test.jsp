@@ -18,9 +18,11 @@
     <title>测试文件上传</title>
 </head>
 <body>
-<form action="<%=basePath%>video/testUpload" method="post" enctype="multipart/form-data">
-    最简单的文件上传：<input type="file" name="fileupload"/>
-    描述：<input type="text" name="desc"/>
+<form action="<%=basePath%>video/upload" method="post" enctype="multipart/form-data">
+    选择文件：<input type="file" name="fileupload"/>
+    <br/>
+    文件描述：<input type="text" name="desc"/>
+    <br/>
     <input type="submit" value="submit"/>
 </form>
 </body>

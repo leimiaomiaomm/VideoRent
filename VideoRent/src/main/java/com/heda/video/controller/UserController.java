@@ -256,7 +256,6 @@ public class UserController {
       paramMap = getPageRows(currentPage,pageSize);
       List<User> users = userService.getUserList((Integer) paramMap.get("startNum"),Integer.parseInt(pageSize));
       modelAndView.addObject("users",users);
-      Map map =  getFtpMsg();
       return modelAndView;
   }
 
@@ -264,7 +263,7 @@ public class UserController {
      * 获取ftp连接信息
      * @return
      */
-  public Map getFtpMsg(){
+  /*public Map getFtpMsg(){
       Properties properties = new Properties();
       Map map = new HashMap();
       try {
@@ -286,7 +285,7 @@ public class UserController {
       }
 
       return map;
-      }
+      }*/
     /**
      * Description: 向FTP服务器上传文件
      * @param "host FTP服务器hostname
@@ -299,7 +298,7 @@ public class UserController {
      * @param "input 输入流
      * @return 成功返回true，否则返回false
      */
-     public ModelAndView uploadVideo(String fileName,InputStream inputStream){
+   /*  public ModelAndView uploadVideo(String fileName,InputStream inputStream){
          Map map = new HashMap();
          ModelAndView modelAndView = new ModelAndView();
          boolean result = false;
@@ -357,7 +356,7 @@ public class UserController {
          }
          modelAndView.addObject("result",result);
          return modelAndView;
-     }
+     }*/
 
 
    public static void main(String[] args) {
