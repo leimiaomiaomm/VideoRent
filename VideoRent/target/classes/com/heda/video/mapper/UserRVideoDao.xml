@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.heda.video.dao.UserRVideoDao">
+  <resultMap id="BaseResultMap" type="com.heda.video.entity.UserRVideo">
+    <id column="user_r_video_id" jdbcType="INTEGER" property="userRVideoId" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="video_id" jdbcType="VARCHAR" property="videoId" />
+    <result column="actual_return_date" jdbcType="VARCHAR" property="actualReturnDate" />
+    <result column="rent_date" jdbcType="VARCHAR" property="rentDate" />
+    <result column="return_date" jdbcType="VARCHAR" property="returnDate" />
+    <result column="rent" jdbcType="VARCHAR" property="rent" />
+    <result column="deposit" jdbcType="VARCHAR" property="deposit" />
+    <result column="invoice_number" jdbcType="VARCHAR" property="invoiceNumber" />
+    <result column="is_rent" jdbcType="INTEGER" property="isRent" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    user_r_video_id, user_id, video_id, actual_return_date, rent_date, return_date, rent, 
+    deposit, invoice_number, is_rent
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_r_video
+    where user_r_video_id = #{userRVideoId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user_r_video
+    where user_r_video_id = #{userRVideoId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.heda.video.entity.UserRVideo">
+    insert into user_r_video (user_r_video_id, user_id, video_id, 
+      actual_return_date, rent_date, return_date, 
+      rent, deposit, invoice_number, 
+      is_rent)
+    values (#{userRVideoId,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{videoId,jdbcType=VARCHAR},
+      #{actualReturnDate,jdbcType=VARCHAR}, #{rentDate,jdbcType=VARCHAR}, #{returnDate,jdbcType=VARCHAR},
+      #{rent,jdbcType=VARCHAR}, #{deposit,jdbcType=VARCHAR}, #{invoiceNumber,jdbcType=VARCHAR}, 
+      #{isRent,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.heda.video.entity.UserRVideo">
+    update user_r_video
+    set user_id = #{userId,jdbcType=VARCHAR},
+      video_id = #{videoId,jdbcType=VARCHAR},
+      actual_return_date = #{actualReturnDate,jdbcType=VARCHAR},
+      rent_date = #{rentDate,jdbcType=VARCHAR},
+      return_date = #{returnDate,jdbcType=VARCHAR},
+      rent = #{rent,jdbcType=VARCHAR},
+      deposit = #{deposit,jdbcType=VARCHAR},
+      invoice_number = #{invoiceNumber,jdbcType=VARCHAR},
+      is_rent = #{isRent,jdbcType=INTEGER}
+    where user_r_video_id = #{userRVideoId,jdbcType=INTEGER}
+  </update>
+  <select id="getRentRecord" parameterType="java.util.Map" resultMap="BaseResultMap">
+    SELECT
+    FROM user_r_video
+    <if test="userId==null">
+      WHERE 1=1
+    </if>
+    <if test="userId!=null">
+      WHERE user_id=#{userId}
+    </if>
+    limit #{startNum}, #{pageSize}
+
+  </select>
+
+  <update id="updateById" parameterType="com.heda.video.entity.UserRVideo">
+    UPDATE user_r_video
+    SET  actual_return_date= #{actualReturnDate,jdbcType=VARCHAR}, deposit = #{deposit,jdbcType=VARCHAR}
+    WHERE  user_r_video_id=#{recordId}
+  </update>
+
+    <select id="getYearCount" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT COUNT(video_id)
+        FROM user_r_video
+        WHERE user_id=#{userId} AND rent_date LIKE concat(#{year},'%')
+    </select>
+
+  <select id="getNowRentCount" parameterType="java.lang.String" resultType="java.lang.Integer">
+    SELECT COUNT(video_id)
+    FROM user_r_video
+    WHERE user_id=#{userId} AND  actual_return_date is NULL
+  </select>
+</mapper>

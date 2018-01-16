@@ -1,0 +1,120 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="VideoRent:war exploded">
+    <output-path>$PROJECT_DIR$/target/VideoRent</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="VideoRent" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: org.springframework:spring-context-support:4.3.7.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-beans:4.3.7.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-core:4.3.7.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-context:4.3.7.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-aop:4.3.7.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-expression:4.3.7.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:4.3.7.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-tx:4.3.7.RELEASE" />
+          <element id="library" level="project" name="Maven: commons-logging:commons-logging:1.2" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-test:4.3.7.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:4.3.7.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-web:4.3.7.RELEASE" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.7.4" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.7.4" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.7.4" />
+          <element id="library" level="project" name="Maven: javax.servlet:javax.servlet-api:3.1.0" />
+          <element id="library" level="project" name="Maven: net.sf.json-lib:json-lib:jdk15:2.4" />
+          <element id="library" level="project" name="Maven: commons-beanutils:commons-beanutils:1.8.0" />
+          <element id="library" level="project" name="Maven: commons-collections:commons-collections:3.2.1" />
+          <element id="library" level="project" name="Maven: commons-lang:commons-lang:2.5" />
+          <element id="library" level="project" name="Maven: net.sf.ezmorph:ezmorph:1.0.6" />
+          <element id="library" level="project" name="Maven: org.mybatis:mybatis:3.4.2" />
+          <element id="library" level="project" name="Maven: org.mybatis:mybatis-spring:1.3.0" />
+          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.30" />
+          <element id="library" level="project" name="Maven: com.alibaba:druid:1.0.15" />
+          <element id="library" level="project" name="Maven: commons-io:commons-io:2.4" />
+          <element id="library" level="project" name="Maven: log4j:log4j:1.2.16" />
+          <element id="library" level="project" name="Maven: org.jodd:jodd-core:3.8.1" />
+          <element id="library" level="project" name="Maven: org.jodd:jodd-joy:3.6.6" />
+          <element id="library" level="project" name="Maven: org.jodd:jodd-proxetta:3.6.6" />
+          <element id="library" level="project" name="Maven: org.jodd:jodd-log:3.6.6" />
+          <element id="library" level="project" name="Maven: org.jodd:jodd-madvoc:3.6.6" />
+          <element id="library" level="project" name="Maven: org.jodd:jodd-props:3.6.6" />
+          <element id="library" level="project" name="Maven: org.jodd:jodd-servlet:3.6.6" />
+          <element id="library" level="project" name="Maven: org.jodd:jodd-upload:3.6.6" />
+          <element id="library" level="project" name="Maven: org.jodd:jodd-bean:3.6.6" />
+          <element id="library" level="project" name="Maven: org.jodd:jodd-petite:3.6.6" />
+          <element id="library" level="project" name="Maven: org.jodd:jodd-jtx:3.6.6" />
+          <element id="library" level="project" name="Maven: org.jodd:jodd-lagarto:3.6.6" />
+          <element id="library" level="project" name="Maven: org.jodd:jodd-db:3.6.6" />
+          <element id="library" level="project" name="Maven: org.jodd:jodd-mail:3.6.6" />
+          <element id="library" level="project" name="Maven: javax.activation:activation:1.1.1" />
+          <element id="library" level="project" name="Maven: javax.mail:mail:1.4.5" />
+          <element id="library" level="project" name="Maven: org.jodd:jodd-vtor:3.6.6" />
+          <element id="library" level="project" name="Maven: org.apache.ant:ant:1.9.6" />
+          <element id="library" level="project" name="Maven: org.apache.ant:ant-launcher:1.9.6" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-client:9.4.8.v20171121" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-http:9.4.8.v20171121" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-util:9.4.8.v20171121" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-io:9.4.8.v20171121" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-deploy:9.4.8.v20171121" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-webapp:9.4.8.v20171121" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-xml:9.4.8.v20171121" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-servlet:9.4.8.v20171121" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-security:9.4.8.v20171121" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-jmx:9.4.8.v20171121" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-plus:9.4.8.v20171121" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-jndi:9.4.8.v20171121" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-annotations:9.4.8.v20171121" />
+          <element id="library" level="project" name="Maven: javax.annotation:javax.annotation-api:1.2" />
+          <element id="library" level="project" name="Maven: org.ow2.asm:asm:6.0" />
+          <element id="library" level="project" name="Maven: org.ow2.asm:asm-commons:6.0" />
+          <element id="library" level="project" name="Maven: org.ow2.asm:asm-tree:6.0" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-jaspi:9.4.8.v20171121" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-server:9.4.8.v20171121" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty.orbit:javax.security.auth.message:1.0.0.v201108011116" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-rewrite:9.4.8.v20171121" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-servlets:9.4.8.v20171121" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-continuation:9.4.8.v20171121" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-quickstart:9.4.8.v20171121" />
+          <element id="library" level="project" name="Maven: javax.transaction:javax.transaction-api:1.2" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty.websocket:websocket-servlet:9.4.8.v20171121" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty.websocket:websocket-api:9.4.8.v20171121" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty.websocket:javax-websocket-server-impl:9.4.8.v20171121" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty.websocket:javax-websocket-client-impl:9.4.8.v20171121" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty.websocket:websocket-client:9.4.8.v20171121" />
+          <element id="library" level="project" name="Maven: javax.websocket:javax.websocket-client-api:1.0" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty.websocket:websocket-server:9.4.8.v20171121" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty.websocket:websocket-common:9.4.8.v20171121" />
+          <element id="library" level="project" name="Maven: javax.websocket:javax.websocket-api:1.0" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-alpn-client:9.4.8.v20171121" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty.http2:http2-server:9.4.8.v20171121" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty.http2:http2-common:9.4.8.v20171121" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty.http2:http2-hpack:9.4.8.v20171121" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty.http2:http2-client:9.4.8.v20171121" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty.orbit:javax.mail.glassfish:1.4.1.v201005082020" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty.orbit:javax.activation:1.1.0.v201105071233" />
+          <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.6.6" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:apache-jstl:9.4.8.v20171121" />
+          <element id="library" level="project" name="Maven: org.apache.taglibs:taglibs-standard-spec:1.2.5" />
+          <element id="library" level="project" name="Maven: org.apache.taglibs:taglibs-standard-impl:1.2.5" />
+          <element id="library" level="project" name="Maven: commons-net:commons-net:3.3" />
+          <element id="library" level="project" name="Maven: commons-fileupload:commons-fileupload:1.2.1" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-jsp:9.3.0.M1" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty.toolchain:jetty-schemas:3.1.M0" />
+          <element id="library" level="project" name="Maven: javax.servlet.jsp:javax.servlet.jsp-api:2.3.1" />
+          <element id="library" level="project" name="Maven: org.glassfish.web:javax.servlet.jsp:2.3.2" />
+          <element id="library" level="project" name="Maven: org.glassfish:javax.el:3.0.0" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty.orbit:javax.servlet.jsp.jstl:1.2.0.v201105211821" />
+          <element id="library" level="project" name="Maven: org.glassfish.web:javax.servlet.jsp.jstl:1.2.2" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty.orbit:org.eclipse.jdt.core:3.8.2.v20130121" />
+          <element id="library" level="project" name="Maven: ftp4j:ftp4j:1.7.2" />
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/target/VideoRent/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="VideoRent/web/Web" />
+    </root>
+  </artifact>
+</component>

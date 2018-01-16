@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.heda.video.dao.VideoDao">
+  <resultMap id="BaseResultMap" type="com.heda.video.entity.Video">
+    <id column="video_id" jdbcType="INTEGER" property="videoId" />
+    <result column="video_no" jdbcType="VARCHAR" property="videoNo" />
+    <result column="video_name" jdbcType="VARCHAR" property="videoName" />
+    <result column="director" jdbcType="VARCHAR" property="director" />
+    <result column="actor" jdbcType="VARCHAR" property="actor" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="year" jdbcType="VARCHAR" property="year" />
+    <result column="count" jdbcType="INTEGER" property="count" />
+    <result column="current_count" jdbcType="INTEGER" property="currentCount" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="video_url" jdbcType="VARCHAR" property="videoUrl" />
+    <result column="description" jdbcType="VARCHAR" property="desc" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="rent_times" jdbcType="VARCHAR" property="rentTimes" />
+    <result column="position" jdbcType="VARCHAR" property="position" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    video_id, video_no, video_name, director, actor, type, year, count, current_count, 
+    price, video_url, description, status, rent_times, position
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from video
+    where video_id = #{videoId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from video
+    where video_id = #{id,jdbcType=INTEGER} AND status!=1
+  </delete>
+  <delete id="deleteMoreVideo" parameterType="java.lang.Integer">
+    DELETE FROM video
+    WHERE video_id IN #{list}
+  </delete>
+  <insert id="insert" parameterType="com.heda.video.entity.Video">
+    insert into video (video_id, video_no, video_name, 
+      director, actor, type, 
+      year, count, current_count, 
+      price, video_url, description,
+      status, rent_times, position)
+    values (#{videoId,jdbcType=INTEGER}, #{videoNo,jdbcType=VARCHAR}, #{videoName,jdbcType=VARCHAR}, 
+      #{director,jdbcType=VARCHAR}, #{actor,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{year,jdbcType=VARCHAR}, #{count,jdbcType=INTEGER}, #{currentCount,jdbcType=INTEGER}, 
+      #{price,jdbcType=DECIMAL}, #{videoUrl,jdbcType=VARCHAR}, #{desc,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR}, #{rentTimes,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.heda.video.entity.Video">
+    update video
+    set
+      video_name = #{videoName,jdbcType=VARCHAR},
+      director = #{director,jdbcType=VARCHAR},
+      actor = #{actor,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      year = #{year,jdbcType=VARCHAR},
+      count = #{count,jdbcType=INTEGER},
+      current_count = #{currentCount,jdbcType=INTEGER},
+      price = #{price,jdbcType=DECIMAL},
+      video_url = #{videoUrl,jdbcType=VARCHAR},
+      description = #{desc,jdbcType=VARCHAR},
+      position = #{position,jdbcType=VARCHAR}
+    where video_id = #{videoId,jdbcType=INTEGER} AND status!=1
+  </update>
+  <select id="getVideoList" resultMap="BaseResultMap">
+    SELECT *
+    FROM video
+    <if test="condition=='null'">
+    WHERE 1=1
+    </if>
+    <if test="#{condition}!='null'">
+      WHERE video_no LIKE '%#{condition}%' OR actor LIKE '%#{condition}%' OR video_name LIKE '%#{condition}%'
+    </if>
+    limit #{startNum} ,#{pageSize}
+  </select>
+
+  <select id="selectVideo" parameterType="java.lang.String" resultMap="BaseResultMap">
+   SELECT *
+    FROM video
+    WHERE video_no LIKE concat('%',#{condition},'%') OR video_name LIKE concat('%',#{condition},'%') OR actor LIKE concat('%',#{condition},'%')
+  </select>
+
+
+
+
+  <select id="getHotVideoList" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM  video
+    ORDER BY rent_times DESC
+    limit 5
+  </select>
+  <select id="getNewVideoList" resultMap="BaseResultMap">
+    SELECT *
+    FROM  video
+    ORDER BY `year` DESC
+    limit 5
+  </select>
+  <select id="getTypeByUserId" parameterType="java.lang.Integer" resultType="java.lang.String">
+    SELECT
+	video.type
+    FROM
+      user_r_video
+    LEFT JOIN video ON user_r_video.video_id = video.video_id
+    WHERE
+        user_id = #{userId}
+    GROUP BY video.type
+    ORDER BY COUNT(video.type) DESC
+    LIMIT 1
+  </select>
+    <select id="getHotVideoByType" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT *
+        FROM video
+        WHERE `type`=#{type}
+        ORDER BY rent_times DESC
+        limit 5
+    </select>
+
+    <select id="getCurrentCount" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT current_count
+        FROM video
+        WHERE  video_id=#{videoId}
+    </select>
+    <update id="updateVideoById" parameterType="java.lang.String">
+      UPDATE video
+      SET current_count=current_count-1,rent_times=rent_times+1 ,status=1
+      WHERE video_id=#{videoId}
+    </update>
+    <update id="updateByVideoNum" parameterType="java.lang.String">
+      UPDATE video
+      SET current_count = current_count+1
+      WHERE video_no=#{videoNum}
+    </update>
+
+</mapper>

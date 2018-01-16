@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.heda.video.dao.UserDao">
+  <resultMap id="BaseResultMap" type="com.heda.video.entity.User">
+    <id column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="is_admin" jdbcType="CHAR" property="isAdmin" />
+    <result column="ID_card" jdbcType="VARCHAR" property="idCard" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    user_id, user_name, password, is_admin, ID_card, phone, email
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <select id="login" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT *
+    FROM user
+    WHERE ID_card=#{idCard} AND user_name=#{userName} AND password=#{password}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.heda.video.entity.User">
+    insert into user (user_id, user_name, password, 
+      is_admin, ID_card, phone, email
+      )
+    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{isAdmin,jdbcType=CHAR}, #{idCard,jdbcType=VARCHAR},#{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}
+      )
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.heda.video.entity.User">
+    update user
+    set
+      password = #{password,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+
+  <update id="editUserMsg" parameterType="com.heda.video.entity.User">
+    update user
+    set
+      phone = #{phone,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR}
+    where user_id=#{userId,jdbcType=INTEGER}
+  </update>
+
+
+  <select id="getMonthCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    SELECT COUNT(video_id)
+    FROM user_r_video
+    WHERE user_id=#{userId} AND rent_date &lt;= #{nowDate} AND rent_date &gt;= #{firstDate}
+  </select>
+
+  <select id="getUserList" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    SELECT *
+    FROM user
+    WHERE 1=1
+    limit #{startNum},#{pageSize}
+  </select>
+</mapper>
